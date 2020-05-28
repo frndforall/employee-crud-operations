@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';    
-import EmployeeList from './Employees/EmployeeList'  
+import EmployeeList from './Employees/EmployeeList'
+import AddEmployee from './Employees/AddEmployee'  
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           <div className="collapse navbar-collapse" >    
             <ul className="navbar-nav mr-auto">    
               <li className="nav-item">    
-                <Link to={'/Createemployee'} className="nav-link">Add Employee</Link>    
+                <Link to={'/AddEmployee'} className="nav-link">Add Employee</Link>    
               </li>    
               <li className="nav-item">    
                 <Link to={'/EmployeeList'} className="nav-link">Employee List</Link>    
@@ -21,6 +22,7 @@ function App() {
           </div>    
         </nav> <br />    
         <Switch>    
+          <Route path='/AddEmployee' component={AddEmployee} />
           <Route path='/EmployeeList' component={EmployeeList} />    
         </Switch>    
       </div>    
