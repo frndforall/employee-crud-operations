@@ -6,7 +6,6 @@ import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputG
 function AddEmployee(props) {  
 
   const [employee, setemployee] = useState({ name: '', email: '', age: '',salary: ''});  
-  const [showLoading, setShowLoading] = useState(false); 
   const apiUrl = "http://localhost:3001/api/v1/employees/create";  
 
 
@@ -17,12 +16,15 @@ function AddEmployee(props) {
     axios.post(apiUrl, data)  
       .then((result) => {  
         props.history.push('/EmployeeList')  
-      });  
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      ;  
   };
 
   const onChange = (e) => {  
     e.persist();  
-    debugger;  
     setemployee({...employee, [e.target.name]: e.target.value});  
   } 
 

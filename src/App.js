@@ -23,8 +23,7 @@ function App() {
             </ul>    
           </div>    
         </nav> <br />    
-        <Switch>
-          <Route path='/' component={EmployeeList}/>    
+        <Switch>   
           <Route path='/AddEmployee' component={AddEmployee}/>
           <Route path='/EmployeeList' component={EmployeeList}/>
           <Route path='/edit/:id' component={UpdateEmployee}/>    

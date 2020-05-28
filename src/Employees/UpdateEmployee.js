@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'  
 import axios from 'axios';  
 import { Button, Card, CardBody, CardFooter, Col, Container, Form, Input, InputGroup, Row } from 'reactstrap';  
-function Editemployee(props) {  
+
+
+function UpdateEmployee(props) {  
         const [employee, setemployee]= useState({ _id:'',name: '', email: '', age: '',salary: ''});
 
         const id = props.match.params.id;
@@ -78,4 +80,4 @@ function Editemployee(props) {
                 </div>
         )  
 }  
-export default Editemployee  
+export default UpdateEmployee  
