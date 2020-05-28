@@ -6,23 +6,32 @@ import { useState, useEffect } from 'react'
  
 function EmployeList(props) { 
   const [data, setData] = useState([]); 
+  const GetData = async () => {  
+    const result = await axios('http://localhost:3001/api/v1/employees');  
+    setData(result.data);  
+  }; 
+
   useEffect(() => { 
-    const GetData = async () => {  
-      const result = await axios('http://localhost:3001/api/v1/employees');  
-      setData(result.data);  
-    };  
     GetData();  
-  }, []);  
-  const deleteEmployee = (id) => {  
+  }, []); 
+   
+  const deleteEmployee = (_id) => {  
+      console.log(_id);
     debugger;  
-    axios.delete('http://localhost:62168/api/hooks/Deleteemployee?id=' + id)  
+    axios.post('http://localhost:3001/api/v1/employees/delete?id=' + _id)  
       .then((result) => {  
-        props.history.push('/EmployeList')  
+        // props.history.push('/EmployeList')  
+        GetData();
       });  
 
   };  
 
+  const confirmDelete = (_id) => {
+    window.confirm("Are you sure you wish to delete this item?") && deleteEmployee(_id)
+  }
+
   const updateEmployee = (id) => {  
+    console.log(id);
     props.history.push({  
       pathname: '/edit/' + id  
 
@@ -45,6 +54,7 @@ function EmployeList(props) {
                 <thead>  
 
                   <tr>
+                    <th>Id</th>
                     <th>Name</th>  
                     <th>Email</th>  
                     <th>Age</th>  
@@ -53,16 +63,17 @@ function EmployeList(props) {
                 </thead>  
                 <tbody>  
                   {  
-                    data.map((item, idx) => {  
-                      return <tr>  
+                    data.map((item, id) => {  
+                      return <tr> 
+                        <td>{item._id}</td>  
                         <td>{item.name}</td>  
                         <td>{item.email}</td>  
                         <td>{item.age}</td>  
                         <td>{item.salary}</td>  
                         <td>  
 						<div class="btn-group">  
-                            <button className="btn btn-warning" onClick={() => { updateEmployee(item.Id) }}>Edit</button>  
-                            <button className="btn btn-warning" onClick={() => { deleteEmployee(item.Id) }}>Delete</button>  
+                            <button className="btn btn-warning" onClick={() => { updateEmployee(item._id) }}>Edit</button>  
+                            <button className="btn btn-warning" onClick={() => { confirmDelete(item._id) }}>Delete</button>  
                           </div>  
                         </td>  
                       </tr>  
