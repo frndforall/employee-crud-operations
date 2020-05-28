@@ -2,7 +2,9 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';    
 import EmployeeList from './Employees/EmployeeList'
-import AddEmployee from './Employees/AddEmployee'  
+import AddEmployee from './Employees/AddEmployee'
+import UpdateEmployee from './Employees/UpdateEmployee'
+
 
 function App() {
   return (
@@ -21,9 +23,11 @@ function App() {
             </ul>    
           </div>    
         </nav> <br />    
-        <Switch>    
-          <Route path='/AddEmployee' component={AddEmployee} />
-          <Route path='/EmployeeList' component={EmployeeList} />    
+        <Switch>
+          <Route path='/' component={EmployeeList}/>    
+          <Route path='/AddEmployee' component={AddEmployee}/>
+          <Route path='/EmployeeList' component={EmployeeList}/>
+          <Route path='/edit/:id' component={UpdateEmployee}/>    
         </Switch>    
       </div>    
  </Router> 

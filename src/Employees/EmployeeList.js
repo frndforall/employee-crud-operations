@@ -1,11 +1,12 @@
 import React from 'react'  
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';  
+import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';  
 import axios from 'axios';  
 import { useState, useEffect } from 'react' 
 
  
 function EmployeList(props) { 
   const [data, setData] = useState([]); 
+  
   const GetData = async () => {  
     const result = await axios('http://localhost:3001/api/v1/employees');  
     setData(result.data);  
@@ -14,7 +15,7 @@ function EmployeList(props) {
   useEffect(() => { 
     GetData();  
   }, []); 
-   
+
   const deleteEmployee = (_id) => {  
       console.log(_id);
     debugger;  
@@ -54,18 +55,17 @@ function EmployeList(props) {
                 <thead>  
 
                   <tr>
-                    <th>Id</th>
                     <th>Name</th>  
                     <th>Email</th>  
                     <th>Age</th>  
-                    <th>Salary</th>   
+                    <th>Salary</th>
+                    <th>Actions</th>   
                   </tr>  
                 </thead>  
                 <tbody>  
                   {  
                     data.map((item, id) => {  
                       return <tr> 
-                        <td>{item._id}</td>  
                         <td>{item.name}</td>  
                         <td>{item.email}</td>  
                         <td>{item.age}</td>  
